@@ -9,7 +9,7 @@ function Footer() {
             and Selenium. I hold a B.Tech. degree in Information Technology from
             KIIT University, where I honed my skills in Data Structures &
             Algorithms and problem-solving using C++. My expertise extends to
-            web development, where I've gained hands-on experience with HTML,
+            web development, where I have gained hands-on experience with HTML,
             CSS, JS, Java, and Spring Boot. Passionate about delivering quality
             solutions for diverse clients.
           </p>
