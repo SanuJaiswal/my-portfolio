@@ -1,6 +1,3 @@
-import Link from "next/link";
-import React from "react";
-
 function Footer() {
   return (
     <footer className="bg-black text-gray-400 py-12" id="contact">
@@ -44,14 +41,6 @@ function Footer() {
                 Projects
               </a>
             </li>
-            {/* <li>
-              <a
-                href="#"
-                className="hover:text-white transition-colors duration-300"
-              >
-                Contact
-              </a>
-            </li> */}
           </ul>
         </div>
         <div>
