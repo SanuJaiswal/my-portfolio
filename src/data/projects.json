@@ -1,0 +1,40 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "BlogNest",
+      "slug": "blog-nest",
+      "description": "A dynamic and user-friendly blog posting web application using ReactJS and Appwrite, designed to enable users to effortlessly create, manage, and view blog posts.",
+      "isFeatured": true,
+      "image": "/projects/blogNest.png",
+      "url": "https://blog-nest.netlify.app/"
+    },
+    {
+      "id": 2,
+      "title": "Drum Kit",
+      "slug": "drum-kit",
+      "description": "A fun app where each drum produce their respective sounds when clicked using keyboard or mouse. Check it out and enjoy the drum bits.",
+      "isFeatured": false,
+      "image": "/projects/drumKit.png",
+      "url": "https://sanujaiswal.github.io/drumKit/"
+    },
+    {
+      "id": 3,
+      "title": "Todo App",
+      "slug": "todo-app",
+      "description": "A note-making web app where one can add their respective notes for future references. This web app is created using React.js performing crud operations like add, edit and delete.",
+      "isFeatured": true,
+      "image": "/projects/todo.png",
+      "url": "https://todolist501.netlify.app/"
+    },
+    {
+      "id": 4,
+      "title": "Weather App",
+      "slug": "weather-app",
+      "description": "A cool weather app made using Vanilla (pure) JavaScript. In this app, I have fetched openweathermap.org API for current weather report for the city entered by the user.",
+      "isFeatured": true,
+      "image": "/projects/weather.png",
+      "url": "https://sanujaiswal.github.io/Weather-App/"
+    }
+  ]
+}
