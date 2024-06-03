@@ -61,7 +61,7 @@ const skills = [
 
 function Skills() {
   return (
-    <div className="relative h-[40rem] overflow-hidden flex items-start justify-center md:mb-32 md:mt-0">
+    <div className="relative h-[40rem] overflow-hidden flex items-start justify-center md:mt-0">
       <WavyBackground className="w-full max-w-7xl mx-auto flex flex-col items-center justify-start h-full mt-56 md:mt-40">
         <h2 className="text-2xl md:text-4xl lg:text-7xl text-white font-bold text-center mb-8">
           Know my Skills
