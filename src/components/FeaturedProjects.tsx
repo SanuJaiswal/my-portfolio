@@ -12,6 +12,7 @@ interface Project {
   description: string;
   isFeatured: boolean;
   image: string;
+  url: string;
 }
 
 function FeaturedProjects() {
@@ -51,7 +52,8 @@ function FeaturedProjects() {
                     {project.description}
                   </p>
                   <Link
-                    href={`/projects/${project.slug}`}
+                    href={project.url}
+                    target="_blank"
                     className="mt-2 md:mt-4 text-sm"
                   >
                     Learn More
