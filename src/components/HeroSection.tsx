@@ -23,7 +23,7 @@ function HeroSection() {
         </p>
         <div className="mt-8">
           <a
-            href="https://drive.google.com/file/d/15JuB23EjL34QiHQMGXCgflCy_IpR-Z2T/view?usp=sharing"
+            href="https://drive.google.com/file/d/17siDsHEqzNU6YZRM_6Woc5ZcFhqZ6WRx/view?usp=sharing"
             target="_blank"
           >
             <Button
