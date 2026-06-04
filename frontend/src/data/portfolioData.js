@@ -75,12 +75,12 @@ export const projects = [
     id: 0,
     title: "AI Resume Analyzer",
     slug: "resume-analyzer",
-    description: "Live AI tool that scores how well a resume matches a job description, surfaces skill gaps, and rewrites weak bullet points. Built with GPT-4o, FastAPI, and PDF parsing.",
+    description: "Live AI tool that scores how well a resume matches a job description, surfaces skill gaps, and rewrites weak bullet points. Built with GPT-4o, FastAPI, BeautifulSoup web scraping, and Recharts data viz.",
     isFeatured: true,
-    isInternal: true,
+    isInternal: false,
     image: "/projects/resume-analyzer.svg",
-    url: "/lab/resume-analyzer",
-    stack: ["React", "FastAPI", "GPT-4o", "PDF Parsing"]
+    url: "https://check-resume-score.netlify.app/",
+    stack: ["React", "FastAPI", "GPT-4o", "Recharts"]
   },
   {
     id: 1,
