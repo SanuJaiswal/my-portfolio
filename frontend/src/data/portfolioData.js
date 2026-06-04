@@ -1,16 +1,18 @@
 export const profile = {
   name: "Sanu Jaiswal",
-  role: "Software Engineer",
+  role: "Software Engineer & Full-Stack Developer",
   location: "Bengaluru, India",
   email: "sjlskdevi49@gmail.com",
   resumeUrl: "",
   githubUrl: "https://github.com/SanuJaiswal",
   linkedinUrl: "https://www.linkedin.com/in/sanujaiswal/",
-  summary: "Software Engineer with experience building scalable full-stack applications using React.js, Node.js, AWS, and modern web technologies.",
+  fiverrUrl: "https://www.fiverr.com/s/99lV2vj",
+  fiverrGigUrl: "https://www.fiverr.com/s/kLqQx7L",
+  summary: "Full-Stack Developer & Freelancer building scalable web applications using React.js, Node.js, AWS, and modern web technologies.",
   intro: [
     "Currently working at Kenvue, previously associated with Deloitte USI, where I contributed to enterprise-grade applications focused on performance, scalability, automation, and user experience.",
     "I enjoy working across the stack, from designing APIs and backend automation to optimizing databases, cloud workflows, and responsive frontend experiences.",
-    "I am interested in cloud technologies, GenAI applications, scalable systems, and product engineering, and I am always learning, building, and exploring better ways to create impactful software."
+    "I've recently started my freelancing journey, offering professional web development services to clients worldwide through Fiverr."
   ],
   highlights: [
     "Full-stack engineering with React, TypeScript, Node.js, and Express.js",
@@ -90,16 +92,6 @@ export const projects = [
   },
   {
     id: 3,
-    title: "Todo App",
-    slug: "todo-app",
-    description: "A React CRUD notes app for adding, editing, deleting, and tracking tasks in a lightweight interface.",
-    isFeatured: false,
-    image: "/projects/todo.png",
-    url: "https://todolist501.netlify.app/",
-    stack: ["React", "JavaScript", "CRUD"]
-  },
-  {
-    id: 4,
     title: "Weather App",
     slug: "weather-app",
     description: "A real-time weather app that uses the OpenWeatherMap API to show temperature data for user-specified cities.",
@@ -107,5 +99,29 @@ export const projects = [
     image: "/projects/weather.png",
     url: "https://sanujaiswal.github.io/Weather-App/",
     stack: ["JavaScript", "API", "CSS"]
+  }
+];
+
+export const services = [
+  {
+    id: 1,
+    title: "Full-Stack Web Development",
+    description: "End-to-end web application development using React, Node.js, and modern tech stack. From concept to deployment.",
+    icon: "Laptop",
+    features: ["React & Next.js", "Node.js & Express", "Database Design", "API Development"]
+  },
+  {
+    id: 2,
+    title: "Frontend Development",
+    description: "Beautiful, responsive, and performant user interfaces with modern frameworks and best practices.",
+    icon: "Palette",
+    features: ["React & TypeScript", "Tailwind CSS", "Responsive Design", "Component Libraries"]
+  },
+  {
+    id: 3,
+    title: "Backend & API Development",
+    description: "Scalable RESTful APIs and backend services with robust architecture and security.",
+    icon: "Server",
+    features: ["REST APIs", "Database Integration", "Authentication", "Cloud Services"]
   }
 ];

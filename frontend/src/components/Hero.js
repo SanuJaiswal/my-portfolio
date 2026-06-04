@@ -150,6 +150,7 @@ const Hero = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-cyan-100 dark:hover:bg-cyan-900/30 hover:text-cyan-600 dark:hover:text-cyan-400 hover:scale-110 transition-all duration-300"
+                title="GitHub"
               >
                 <Github className="h-5 w-5" />
               </a>
@@ -158,15 +159,28 @@ const Hero = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-cyan-100 dark:hover:bg-cyan-900/30 hover:text-cyan-600 dark:hover:text-cyan-400 hover:scale-110 transition-all duration-300"
+                title="LinkedIn"
               >
                 <Linkedin className="h-5 w-5" />
               </a>
               <a
                 href={`mailto:${profile.email}`}
                 className="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-cyan-100 dark:hover:bg-cyan-900/30 hover:text-cyan-600 dark:hover:text-cyan-400 hover:scale-110 transition-all duration-300"
+                title="Email"
               >
                 <Mail className="h-5 w-5" />
               </a>
+              {profile.fiverrUrl && (
+                <a
+                  href={profile.fiverrUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 py-2 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 hover:bg-green-200 dark:hover:bg-green-900/50 hover:scale-110 transition-all duration-300 text-xs font-semibold"
+                  title="Fiverr Profile"
+                >
+                  Fiverr
+                </a>
+              )}
             </motion.div>
           </motion.div>
 
