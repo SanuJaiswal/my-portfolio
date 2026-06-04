@@ -3,11 +3,14 @@ from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 import os
 import io
+import re
 import json
 import asyncio
 import logging
 import resend
 import uuid
+import httpx
+from bs4 import BeautifulSoup
 from pathlib import Path
 from pydantic import BaseModel, Field, EmailStr
 from pypdf import PdfReader
@@ -104,12 +107,19 @@ RESUME_ANALYZER_SYSTEM_PROMPT = """You are a senior tech recruiter and resume co
 You ALWAYS respond with ONLY valid JSON in this exact structure (no markdown, no code fences):
 {
   "match_score": <int 0-100>,
-  "verdict": "<one-line summary, e.g. 'Strong match with minor gaps'>",
-  "matched_skills": ["skill1", "skill2", ...],
-  "missing_skills": ["skill1", "skill2", ...],
-  "strengths": ["short bullet 1", "short bullet 2", "short bullet 3"],
-  "gaps": ["short bullet 1", "short bullet 2", "short bullet 3"],
-  "suggestions": ["actionable bullet 1", "actionable bullet 2", "actionable bullet 3", "actionable bullet 4"],
+  "verdict": "<one-line summary>",
+  "matched_skills": ["skill1", ...],
+  "missing_skills": ["skill1", ...],
+  "category_scores": {
+    "technical_skills": <int 0-100>,
+    "experience": <int 0-100>,
+    "domain_knowledge": <int 0-100>,
+    "soft_skills": <int 0-100>,
+    "education": <int 0-100>
+  },
+  "strengths": ["bullet1", "bullet2", "bullet3"],
+  "gaps": ["bullet1", "bullet2", "bullet3"],
+  "suggestions": ["actionable1", "actionable2", "actionable3", "actionable4"],
   "improved_bullets": [
     {"original": "<weak bullet from resume>", "improved": "<rewritten with metrics and JD keywords>"},
     {"original": "<weak bullet from resume>", "improved": "<rewritten with metrics and JD keywords>"}
@@ -118,17 +128,79 @@ You ALWAYS respond with ONLY valid JSON in this exact structure (no markdown, no
 
 Rules:
 - match_score: be realistic, not generous. 90+ only if truly exceptional match.
+- category_scores: rate each independently 0-100 based on JD requirements vs resume evidence.
 - Keep arrays concise (3-6 items each).
-- improved_bullets: pick 2-3 actual bullets from the resume and rewrite them stronger.
-- All text in plain ASCII, no emojis."""
+- improved_bullets: pick 2-3 actual bullets from resume and rewrite stronger.
+- Plain ASCII, no emojis."""
 
 
 def extract_text_from_pdf(pdf_bytes: bytes) -> str:
     reader = PdfReader(io.BytesIO(pdf_bytes))
-    text_parts = []
-    for page in reader.pages:
-        text_parts.append(page.extract_text() or "")
-    return "\n".join(text_parts).strip()
+    return "\n".join((page.extract_text() or "") for page in reader.pages).strip()
+
+
+def extract_jd_from_html(html: str) -> str:
+    """Extract clean job description text from an HTML page."""
+    soup = BeautifulSoup(html, "lxml")
+    # Drop scripts, styles, navigation, footers
+    for tag in soup(["script", "style", "nav", "footer", "header", "aside", "noscript"]):
+        tag.decompose()
+
+    # Try common JD selectors first
+    selectors = [
+        '[class*="job-description"]', '[class*="jobDescription"]',
+        '[class*="description"]', '[id*="job-description"]',
+        '[data-testid*="jobDescription"]', 'main', 'article',
+    ]
+    for sel in selectors:
+        node = soup.select_one(sel)
+        if node:
+            text = node.get_text(separator="\n", strip=True)
+            if len(text) > 300:
+                return text
+
+    # Fallback: full page text
+    text = soup.get_text(separator="\n", strip=True)
+    # Collapse multiple newlines/spaces
+    text = re.sub(r"\n{3,}", "\n\n", text)
+    text = re.sub(r"[ \t]{2,}", " ", text)
+    return text
+
+
+class JobUrlRequest(BaseModel):
+    url: str
+
+
+@api_router.post("/resume/fetch-job")
+async def fetch_job_description(payload: JobUrlRequest):
+    url = payload.url.strip()
+    if not url.startswith(("http://", "https://")):
+        raise HTTPException(status_code=400, detail="URL must start with http:// or https://")
+
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9",
+    }
+
+    try:
+        async with httpx.AsyncClient(timeout=15.0, follow_redirects=True) as client:
+            resp = await client.get(url, headers=headers)
+            if resp.status_code in (401, 403):
+                raise HTTPException(status_code=400, detail="This site blocks scraping (e.g. LinkedIn). Please paste the job description manually.")
+            if resp.status_code >= 400:
+                raise HTTPException(status_code=400, detail=f"Could not fetch the URL (status {resp.status_code}).")
+
+            text = extract_jd_from_html(resp.text)
+            if len(text) < 200:
+                raise HTTPException(status_code=400, detail="Could not extract meaningful content. Please paste the job description manually.")
+
+            # Trim very long results
+            text = text[:6000]
+            return {"job_description": text, "char_count": len(text)}
+    except httpx.RequestError as e:
+        logger.error(f"Job URL fetch error: {str(e)}")
+        raise HTTPException(status_code=400, detail="Failed to reach the URL. Check the link and try again.")
 
 
 @api_router.post("/resume/analyze")
@@ -153,6 +225,8 @@ async def analyze_resume(
 
     if not resume_content:
         raise HTTPException(status_code=400, detail="Resume content is required.")
+    if len(resume_content) < 80:
+        raise HTTPException(status_code=400, detail="Resume content is too short. Please provide your full resume.")
     if len(job_description.strip()) < 30:
         raise HTTPException(status_code=400, detail="Job description is too short (min 30 chars).")
 
