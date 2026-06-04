@@ -11,6 +11,7 @@ import Experience from "./components/Experience";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import ResumeAnalyzer from "./components/ResumeAnalyzer";
 
 const Home = () => {
   return (
@@ -35,6 +36,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/lab/resume-analyzer" element={<ResumeAnalyzer />} />
         </Routes>
         <Toaster />
       </BrowserRouter>

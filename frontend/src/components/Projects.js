@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Sparkles } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { motion, useInView } from 'framer-motion';
 import { projects } from '../data/portfolioData';
 import { Badge } from './ui/badge';
@@ -8,6 +9,15 @@ import { Button } from './ui/button';
 const Projects = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const navigate = useNavigate();
+
+  const handleOpen = (project) => {
+    if (project.isInternal) {
+      navigate(project.url);
+    } else {
+      window.open(project.url, '_blank');
+    }
+  };
 
   return (
     <section id="projects" className="py-20 bg-white dark:bg-slate-900" ref={ref}>
@@ -57,7 +67,12 @@ const Projects = () => {
                   <h3 className="text-2xl font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
                     {project.title}
                   </h3>
-                  {project.isFeatured && (
+                  {project.isInternal ? (
+                    <Badge variant="default" className="bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-600 hover:to-emerald-600 flex items-center gap-1">
+                      <Sparkles className="h-3 w-3" />
+                      Live AI Demo
+                    </Badge>
+                  ) : project.isFeatured && (
                     <Badge variant="default" className="bg-cyan-500 hover:bg-cyan-600">
                       Featured
                     </Badge>
@@ -87,10 +102,19 @@ const Projects = () => {
                     variant="default"
                     size="sm"
                     className="flex-1 bg-slate-900 hover:bg-cyan-600 dark:bg-slate-100 dark:hover:bg-cyan-400 dark:text-slate-900 transition-all duration-300"
-                    onClick={() => window.open(project.url, '_blank')}
+                    onClick={() => handleOpen(project)}
                   >
-                    <ExternalLink className="h-4 w-4 mr-2" />
-                    Live Demo
+                    {project.isInternal ? (
+                      <>
+                        <Sparkles className="h-4 w-4 mr-2" />
+                        Try It Live
+                      </>
+                    ) : (
+                      <>
+                        <ExternalLink className="h-4 w-4 mr-2" />
+                        Live Demo
+                      </>
+                    )}
                   </Button>
                 </div>
               </div>

@@ -72,6 +72,17 @@ export const experience = [
 
 export const projects = [
   {
+    id: 0,
+    title: "AI Resume Analyzer",
+    slug: "resume-analyzer",
+    description: "Live AI tool that scores how well a resume matches a job description, surfaces skill gaps, and rewrites weak bullet points. Built with GPT-4o, FastAPI, and PDF parsing.",
+    isFeatured: true,
+    isInternal: true,
+    image: "/projects/resume-analyzer.svg",
+    url: "/lab/resume-analyzer",
+    stack: ["React", "FastAPI", "GPT-4o", "PDF Parsing"]
+  },
+  {
     id: 1,
     title: "BlogNest",
     slug: "blog-nest",

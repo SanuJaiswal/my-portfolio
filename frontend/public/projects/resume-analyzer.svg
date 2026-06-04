@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#164e63"/>
+    </linearGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bg)"/>
+
+  <!-- Glowing dots background -->
+  <circle cx="120" cy="100" r="2" fill="#06b6d4" opacity="0.5"/>
+  <circle cx="700" cy="80" r="1.5" fill="#10b981" opacity="0.4"/>
+  <circle cx="650" cy="400" r="2" fill="#06b6d4" opacity="0.5"/>
+  <circle cx="100" cy="420" r="1.5" fill="#10b981" opacity="0.4"/>
+  <circle cx="400" cy="60" r="1.5" fill="#06b6d4" opacity="0.4"/>
+
+  <!-- Score ring -->
+  <g transform="translate(180,250)">
+    <circle r="80" fill="none" stroke="#1e293b" stroke-width="14"/>
+    <circle r="80" fill="none" stroke="url(#ring)" stroke-width="14" stroke-linecap="round"
+            stroke-dasharray="502" stroke-dashoffset="100" transform="rotate(-90)" filter="url(#glow)"/>
+    <text text-anchor="middle" dy="8" font-family="Inter, sans-serif" font-size="46" font-weight="700" fill="#fff">82</text>
+    <text text-anchor="middle" dy="38" font-family="Inter, sans-serif" font-size="11" fill="#94a3b8" letter-spacing="2">MATCH SCORE</text>
+  </g>
+
+  <!-- Title -->
+  <text x="340" y="180" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#22d3ee" letter-spacing="3">AI · GPT-4o</text>
+  <text x="340" y="225" font-family="Inter, sans-serif" font-size="36" font-weight="800" fill="#fff">Resume</text>
+  <text x="340" y="265" font-family="Inter, sans-serif" font-size="36" font-weight="800" fill="#fff">Analyzer</text>
+
+  <!-- Skill pills -->
+  <g font-family="Inter, sans-serif" font-size="12" font-weight="600">
+    <rect x="340" y="290" width="86" height="26" rx="13" fill="#10b981" opacity="0.2" stroke="#10b981" stroke-width="1"/>
+    <text x="383" y="307" text-anchor="middle" fill="#34d399">React ✓</text>
+
+    <rect x="434" y="290" width="86" height="26" rx="13" fill="#10b981" opacity="0.2" stroke="#10b981" stroke-width="1"/>
+    <text x="477" y="307" text-anchor="middle" fill="#34d399">Node.js ✓</text>
+
+    <rect x="528" y="290" width="86" height="26" rx="13" fill="#10b981" opacity="0.2" stroke="#10b981" stroke-width="1"/>
+    <text x="571" y="307" text-anchor="middle" fill="#34d399">AWS ✓</text>
+
+    <rect x="340" y="324" width="106" height="26" rx="13" fill="#ef4444" opacity="0.15" stroke="#ef4444" stroke-width="1"/>
+    <text x="393" y="341" text-anchor="middle" fill="#fca5a5">Kubernetes ✗</text>
+
+    <rect x="454" y="324" width="86" height="26" rx="13" fill="#ef4444" opacity="0.15" stroke="#ef4444" stroke-width="1"/>
+    <text x="497" y="341" text-anchor="middle" fill="#fca5a5">GraphQL ✗</text>
+  </g>
+
+  <!-- Bottom tag -->
+  <text x="340" y="390" font-family="Inter, sans-serif" font-size="14" fill="#94a3b8">Match scoring · Skill gaps · AI rewrites</text>
+</svg>
