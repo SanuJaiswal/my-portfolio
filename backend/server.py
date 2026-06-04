@@ -92,12 +92,15 @@ async def send_contact_message(payload: ContactMessage):
         "reply_to": payload.email,
     }
 
-    try:
-        email = await asyncio.to_thread(resend.Emails.send, params)
-        return {"status": "success", "email_id": email.get("id")}
-    except Exception as e:
-        logger.error(f"Failed to send contact email: {str(e)}")
-        raise HTTPException(status_code=500, detail="Failed to send message. Please try again later.")
+    async def _send_in_background(params: dict):
+        try:
+            await asyncio.to_thread(resend.Emails.send, params)
+        except Exception as e:
+            logger.error(f"Background email send failed: {str(e)}")
+
+    # Fire and forget — return 200 immediately so the UI feels instant.
+    asyncio.create_task(_send_in_background(params))
+    return {"status": "queued"}
 
 
 # ============ AI RESUME ANALYZER ============
