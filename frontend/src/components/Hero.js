@@ -92,6 +92,15 @@ const Hero = () => {
             </div>
 
             <motion.p 
+              className="text-xl sm:text-2xl text-cyan-700 dark:text-cyan-400 font-semibold leading-snug max-w-2xl"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.45, duration: 0.6 }}
+            >
+              {profile.tagline}
+            </motion.p>
+
+            <motion.p 
               className="text-lg sm:text-xl text-slate-700 dark:text-slate-300 leading-relaxed max-w-2xl"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

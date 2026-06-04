@@ -1,6 +1,6 @@
 export const profile = {
   name: "Sanu Jaiswal",
-  role: "Software Engineer & Full-Stack Developer",
+  role: "Software Engineer & Freelancer",
   location: "Bengaluru, India",
   email: "sjlskdevi49@gmail.com",
   resumeUrl: "",
@@ -8,11 +8,12 @@ export const profile = {
   linkedinUrl: "https://www.linkedin.com/in/sanujaiswal/",
   fiverrUrl: "https://www.fiverr.com/s/99lV2vj",
   fiverrGigUrl: "https://www.fiverr.com/s/kLqQx7L",
-  summary: "Full-Stack Developer & Freelancer building scalable web applications using React.js, Node.js, AWS, and modern web technologies.",
+  tagline: "I help businesses ship modern, scalable web products — from idea to production.",
+  summary: "Full-Stack Developer with 2+ years of experience building production-grade React and Node.js applications for global enterprises. Now available for freelance projects.",
   intro: [
-    "Currently working at Kenvue, previously associated with Deloitte USI, where I contributed to enterprise-grade applications focused on performance, scalability, automation, and user experience.",
-    "I enjoy working across the stack, from designing APIs and backend automation to optimizing databases, cloud workflows, and responsive frontend experiences.",
-    "I've recently started my freelancing journey, offering professional web development services to clients worldwide through Fiverr."
+    "I'm a Software Engineer currently at Kenvue, previously at Deloitte USI, where I've shipped enterprise dashboards, REST APIs, GenAI tools, and cloud automation used by real teams in production.",
+    "I work end-to-end — designing clean UIs in React & TypeScript, building reliable Node.js / Python backends, integrating with AWS and databases, and obsessing over performance and user experience.",
+    "Through freelancing on Fiverr, I'm helping startups, founders, and small businesses turn their ideas into well-built web applications. If you need a developer who treats your project like their own, let's talk."
   ],
   highlights: [
     "Full-stack engineering with React, TypeScript, Node.js, and Express.js",

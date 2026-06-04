@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import axios from 'axios';
 import { Mail, Send, Github, Linkedin, MapPin } from 'lucide-react';
 import { motion, useInView } from 'framer-motion';
 import { profile } from '../data/portfolioData';
@@ -7,6 +8,8 @@ import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Badge } from './ui/badge';
 import { useToast } from '../hooks/use-toast';
+
+const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 const Contact = () => {
   const ref = useRef(null);
@@ -31,15 +34,23 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate API call - Frontend only mock
-    setTimeout(() => {
+    try {
+      await axios.post(`${API}/contact`, formData);
       toast({
         title: "Message sent!",
         description: "Thank you for reaching out. I'll get back to you soon.",
       });
       setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      const detail = error?.response?.data?.detail || "Something went wrong. Please try again.";
+      toast({
+        title: "Failed to send message",
+        description: typeof detail === 'string' ? detail : "Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   return (
