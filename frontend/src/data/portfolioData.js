@@ -1,3 +1,5 @@
+const yearsOfExperience = new Date().getFullYear() - 2023;
+
 export const profile = {
   name: "Sanu Jaiswal",
   role: "Software Engineer & Freelancer",
@@ -9,7 +11,7 @@ export const profile = {
   fiverrUrl: "https://www.fiverr.com/s/99lV2vj",
   fiverrGigUrl: "https://www.fiverr.com/s/kLqQx7L",
   tagline: "I help businesses ship modern, scalable web products — from idea to production.",
-  summary: "Full-Stack Developer with 2+ years of experience building production-grade React and Node.js applications for global enterprises. Now available for freelance projects.",
+  summary: `Full-Stack Developer with ${yearsOfExperience}+ years of experience building production-grade React and Node.js applications for global enterprises. Now available for freelance projects.`,
   intro: [
     "I'm a Software Engineer currently at Kenvue, previously at Deloitte USI, where I've shipped enterprise dashboards, REST APIs, GenAI tools, and cloud automation used by real teams in production.",
     "I work end-to-end — designing clean UIs in React & TypeScript, building reliable Node.js / Python backends, integrating with AWS and databases, and obsessing over performance and user experience.",
@@ -23,7 +25,7 @@ export const profile = {
 };
 
 export const stats = [
-  { value: "2+", label: "Years across full-stack and automation work" },
+  { value: `${yearsOfExperience}+`, label: "Years across full-stack and automation work" },
   { value: "4", label: "Client/product engineering streams delivered" },
   { value: "25%", label: "Manual testing effort reduced through automation" }
 ];
