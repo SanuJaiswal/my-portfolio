@@ -52,10 +52,11 @@ export const experience = [
     period: "Sep 2025 - Present",
     summary: "Delivering full-stack automation and enterprise search capabilities across React, TypeScript, Python, AWS, Azure Storage, and Databricks Unity Catalog.",
     impact: [
-      "Built guided provisioning automation with prerequisite gating to reduce invalid executions and improve user flow reliability.",
-      "Implemented GitHub App authentication using JWT and installation tokens with caching, plus clearer backend success and error propagation.",
-      "Led Content Search integration with strong loading, empty, and error states to improve unstructured data discoverability.",
-      "Supported backend automation with AWS Lambda, CloudWatch Logs, and DynamoDB metadata queries."
+      "Led the design and delivery of governance-driven provisioning workflows for cloud and data platform resources, reducing execution failures and improving operational consistency at scale.",
+      "Led the implementation of enterprise SSO and directory-driven authorization controls, enabling secure self-service access, reducing administrative overhead, and strengthening platform governance.",
+      "Delivered enterprise search and discovery capabilities for large-scale information repositories, improving content accessibility and accelerating access to critical business information.",
+      "Modernized engineering delivery practices through CI/CD enhancements, deployment standardization, and automated quality controls, increasing release reliability and accelerating delivery velocity.",
+      "Built resilient automation services with proactive monitoring, automated recovery handling, and enhanced execution visibility, improving platform stability and reducing operational overhead."
     ]
   },
   {
